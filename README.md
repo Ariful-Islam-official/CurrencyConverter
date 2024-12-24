@@ -1,104 +1,100 @@
 # Currency Converter
 
-## **Overview**
-This is a responsive **Currency Converter** application built using HTML, CSS, and JavaScript. Users can input an amount, select a source and target currency, and get real-time exchange rates. The application uses a public currency API to fetch the latest rates.
+A simple and interactive currency converter web application built using **HTML**, **CSS**, and **JavaScript**. It allows users to convert currency values from USD to TAKA (BDT) with a fixed conversion rate and supports dynamic exchange rates for other currencies using a reliable API.
 
 ---
 
-## **Features**
-- Real-time currency conversion using the latest exchange rates.
-- Dropdown menus with country flags for selecting currencies.
-- Validation for input amounts.
-- User-friendly interface with clear messages for conversions.
-- Mobile-friendly and responsive design.
+## Features
+
+- **Fixed Conversion Rate**: 1 USD = 110 BDT.
+- **Dynamic Currency Conversion**: Fetches real-time exchange rates for other currencies using the [Fawaz Ahmed Currency API](https://github.com/fawazahmed0/currency-api).
+- **Interactive Dropdowns**: Predefined dropdowns for selecting currencies with flag icons.
+- **Responsive Design**: Clean and responsive user interface.
 
 ---
 
-## **Technologies Used**
-- **HTML**: Provides the structure for the application.
-- **CSS**: Styles the application and ensures a responsive design.
-- **JavaScript**: Implements the logic for fetching data and performing conversions.
-- **Currency API**: Fetches the latest exchange rates.
+## Technologies Used
+
+- **HTML**: Structure of the application.
+- **CSS**: Styling for the interface.
+- **JavaScript**: Logic for currency conversion and API integration.
 
 ---
 
-## **How to Use**
-1. Enter the amount you wish to convert in the input field.
-2. Select the source currency from the "From" dropdown menu.
-3. Select the target currency from the "To" dropdown menu.
-4. Click the **Get Exchange Rate** button.
-5. View the converted amount and the exchange rate in the message box.
+## How to Use
+
+1. Clone the repository to your local machine.
+2. Open the `index.html` file in a browser.
+3. Enter the amount in the input field.
+4. Choose the "From" and "To" currencies from the dropdown menus.
+5. Click on the **Get Exchange Rate** button to view the conversion.
 
 ---
 
-## **File Structure**
-- `index.html`: Contains the HTML structure of the application.
-- `style.css`: Handles the styling and layout of the app.
-- `app.js`: Implements the core logic for currency conversion.
-- `codes.js`: Contains the country codes and their corresponding currency codes.
+## Files Included
 
----
-
-## **Code Explanation**
-
-### **1. HTML Structure**
-The `index.html` file defines the layout, including input fields, dropdowns for currency selection, and a button for fetching the exchange rate.
-
+### 1. **HTML** (`index.html`)
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Currency Converter</title>
-    <link href="style.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <h2>Currency Converter</h2>
-      <form>
-        <div class="amount">
-          <p>Enter Amount</p>
-          <input value="1" type="text" />
-        </div>
-        <div class="dropdown">
-          <div class="from">
-            <p>From</p>
-            <div class="select-container">
-              <img src="https://flagsapi.com/US/flat/64.png" />
-              <select name="from"></select>
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-right-arrow-left"></i>
-          <div class="to">
-            <p>To</p>
-            <div class="select-container">
-              <img src="https://flagsapi.com/IN/flat/64.png" />
-              <select name="to"></select>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <link href="style.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <div class="container">
+    <h2>Currency Converter</h2>
+    <form>
+      <div class="amount">
+        <p>Enter Amount</p>
+        <input type="number" value="1" min="1" />
+      </div>
+      <div class="dropdown">
+        <div class="from">
+          <p>From</p>
+          <div class="select-container">
+            <img src="https://flagsapi.com/US/flat/64.png" />
+            <select name="from">
+              <option value="USD" selected>USD</option>
+            </select>
           </div>
         </div>
-        <div class="msg">1USD = 80INR</div>
-        <button>Get Exchange Rate</button>
-      </form>
-    </div>
-    <script src="codes.js"></script>
-    <script src="app.js"></script>
-  </body>
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        <div class="to">
+          <p>To</p>
+          <div class="select-container">
+            <img src="https://flagsapi.com/BD/flat/64.png" />
+            <select name="to">
+              <option value="BDT" selected>BDT</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="msg">1 USD = 110 BDT</div>
+      <button>Get Exchange Rate</button>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
 </html>
 ```
 
----
-
-### **2. CSS Styling**
-The `style.css` file ensures a clean and responsive design with modern aesthetics.
-
+### 2. **CSS** (`style.css`)
 ```css
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -116,16 +112,23 @@ body {
 }
 
 form {
-  margin: 2rem 0;
+  margin: 2rem 0 1rem 0;
+}
+
+form select,
+button,
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 0.75rem;
 }
 
 form input {
-  width: 100%;
   border: 1px solid lightgray;
   font-size: 1rem;
   height: 3rem;
   padding-left: 0.5rem;
-  border-radius: 0.75rem;
 }
 
 .dropdown {
@@ -135,11 +138,32 @@ form input {
   margin-top: 2rem;
 }
 
+.dropdown i {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.select-container img {
+  max-width: 2rem;
+}
+
 .select-container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  border: 1px solid lightgray;
+  width: 6rem;
   border-radius: 0.5rem;
+  border: 1px solid lightgray;
+}
+
+.select-container select {
+  font-size: 1rem;
+  width: auto;
+}
+
+.msg {
+  margin: 2rem 0 2rem 0;
+  text-align: center;
 }
 
 form button {
@@ -151,50 +175,42 @@ form button {
 }
 ```
 
----
-
-### **3. JavaScript Logic**
-The `app.js` file fetches the latest exchange rates and calculates conversions.
-
+### 3. **JavaScript** (`app.js`)
 ```javascript
 const BASE_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies";
-const dropdowns = document.querySelectorAll(".dropdown select");
+
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
 const toCurr = document.querySelector(".to select");
 const msg = document.querySelector(".msg");
 
-for (let select of dropdowns) {
-  for (currCode in countryList) {
-    let newOption = document.createElement("option");
-    newOption.innerText = currCode;
-    newOption.value = currCode;
-    if (select.name === "from" && currCode === "USD") {
-      newOption.selected = "selected";
-    } else if (select.name === "to" && currCode === "INR") {
-      newOption.selected = "selected";
-    }
-    select.append(newOption);
-  }
-  select.addEventListener("change", (evt) => {
-    updateFlag(evt.target);
-  });
-}
-
 const updateExchangeRate = async () => {
-  let amount = document.querySelector(".amount input");
-  let amtVal = amount.value;
-  if (amtVal === "" || amtVal < 1) {
-    amtVal = 1;
-    amount.value = "1";
-  }
-  const URL = `${BASE_URL}/${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`;
-  let response = await fetch(URL);
-  let data = await response.json();
-  let rate = data[toCurr.value.toLowerCase()];
+  let amountInput = document.querySelector(".amount input");
+  let amountValue = amountInput.value;
 
-  let finalAmount = amtVal * rate;
-  msg.innerText = `${amtVal} ${fromCurr.value} = ${finalAmount} ${toCurr.value}`;
+  if (amountValue === "" || amountValue < 1) {
+    amountValue = 1;
+    amountInput.value = "1";
+  }
+
+  if (fromCurr.value === "USD" && toCurr.value === "BDT") {
+    // Fixed conversion rate for USD to TAKA (BDT)
+    const rate = 110; // Example fixed rate
+    const finalAmount = amountValue * rate;
+    msg.innerText = `${amountValue} USD = ${finalAmount} BDT`;
+  } else {
+    // Dynamic conversion using the API
+    const URL = `${BASE_URL}/${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`;
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      const rate = data[toCurr.value.toLowerCase()];
+      const finalAmount = amountValue * rate;
+      msg.innerText = `${amountValue} ${fromCurr.value} = ${finalAmount.toFixed(2)} ${toCurr.value}`;
+    } catch (error) {
+      msg.innerText = "Error fetching exchange rate. Try again.";
+    }
+  }
 };
 
 btn.addEventListener("click", (evt) => {
@@ -209,25 +225,17 @@ window.addEventListener("load", () => {
 
 ---
 
-## **Screenshots**
-- **Initial Screen**: Default selection of USD to INR with a placeholder amount.
-- **Conversion Result**: Displays the calculated conversion and exchange rate.
+## API Reference
+- The app uses [Fawaz Ahmed Currency API](https://github.com/fawazahmed0/currency-api) for fetching real-time exchange rates.
 
 ---
 
-## **How to Run the Application**
-1. Clone the repository or download the files.
-2. Open the `index.html` file in any modern web browser.
-3. Use the application to convert currencies in real-time.
+## Future Enhancements
+1. Add support for more currencies in the dropdown menu.
+2. Include historical data for currency trends.
+3. Improve UI responsiveness for smaller screens.
 
 ---
 
-## **API Used**
-- The application uses the free [Currency API](https://github.com/fawazahmed0/currency-api) hosted on jsDelivr for fetching exchange rates.
-
----
-
-## **Future Enhancements**
-- Add support for historical exchange rates.
-- Implement a feature for swapping the "From" and "To" currencies.
-- Provide a graph for currency trends.
+## License
+This project is open-source and available under the [MIT License](LICENSE).
